@@ -1,0 +1,2 @@
+# BipStatusbarLibrary
+BipStatusbarLibrary for BipOS
