@@ -15,4 +15,5 @@ Example:
 - //define TIME
 - define DATA
 - define BLUETOOTH
+
 Commit TIME - disable time in statusbar
