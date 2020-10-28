@@ -10,9 +10,9 @@ BipStatusbarLibrary for BipOS
 show_statusbar(3, COLOR_BLACK,COLOR_WHITE) - COLOR_BLACK - Background color  COLOR_WHITE - font color. You can change it as you wish.
 You can config  library in BipStatusbarLib.c - just comment unneeded function #define
 Example:
-	define BATTERY_TEXT
-	define BATTERY_ICON
-	//define TIME
-	define DATA
-	define BLUETOOTH
+- define BATTERY_TEXT
+- define BATTERY_ICON
+- //define TIME
+- define DATA
+- define BLUETOOTH
 Commit TIME - disable time in statusbar
