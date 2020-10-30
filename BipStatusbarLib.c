@@ -33,10 +33,10 @@ void show_statusbar(int y, int bgColor,int fgColor){
 	//БАТАРЕЯ
 	#ifdef BATTERY_ICON
 	set_bg_color(COLOR_BLACK); // делаем фон
-	draw_filled_rect_bg(148, y + 1, 172, y + 15); // сама батарейка
+	draw_filled_rect_bg(152, y, 172, y + 16); // сама батарейка
 	draw_filled_rect_bg(170, y + 4, 174, y + 12); //кончик
 	set_bg_color(COLOR_WHITE); // делаем фон
-	draw_filled_rect_bg(149, y + 2, 171, y + 14); // сама батарейка
+	draw_filled_rect_bg(153, y + 1, 171, y + 15); // сама батарейка
 	draw_filled_rect_bg(171, y + 5, 173, y + 11); //кончик
 	#endif
 		if (get_fw_version() != 11536)
@@ -51,17 +51,17 @@ void show_statusbar(int y, int bgColor,int fgColor){
 	#endif
 			#ifdef BATTERY_ICON
 			//Цвет индикатора батареи
-			char r_count = battery_percentage / 20;
-			r_count = r_count > 4 ? 4 : r_count < 1 ? 1 : r_count;
-				if (battery_percentage > 20) {
-					set_bg_color(battery_percentage <= 60 ? COLOR_YELLOW : COLOR_GREEN);
-				}else if (battery_percentage <= 20) {
+			char r_count = battery_percentage / 33;
+			r_count = r_count > 2 ? 2 : r_count < 1 ? 0 : r_count; // if r_count > 2 = 2 elseif r_count < 1 = 0 else r_count
+				if (battery_percentage > 32) {
+					set_bg_color(battery_percentage <= 65 ? COLOR_YELLOW : COLOR_GREEN);
+				}else if (battery_percentage <= 32) {
 					set_bg_color(COLOR_RED);
 				}
 
-				for (char i = 0; i < r_count; i++)
+				for (char i = 0; i <= r_count; i++)
 				{
-					draw_filled_rect_bg(151 + i * 5, y + 4, 154 + i * 5, y + 12);
+					draw_filled_rect_bg(155 + i * 5, y + 2, 159 + i * 5, y + 14);
 				}
 			#endif
 			#ifdef BATTERY_TEXT
@@ -70,7 +70,7 @@ void show_statusbar(int y, int bgColor,int fgColor){
 			_sprintf(d1, "%01d", battery_percentage); // конвертируем
 			set_bg_color(bgColor); // делаем фон
 				#ifdef BATTERY_ICON
-					text_out_center(d1, 134, y);
+					text_out_center(d1, 138, y);
 				#else
 					text_out(d1, 135, y);
 					text_out("%", 162, y);
