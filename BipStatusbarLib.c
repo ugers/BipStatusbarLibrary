@@ -20,6 +20,10 @@
 #define TIME
 #define DATA
 #define BLUETOOTH
+// Выберите 1 из трех ALARM
+#define ALARM_RING
+//#define ALARM_CLOCK
+//#define ALARM_CLOCK_RING
 
 void show_statusbar(int y, int bgColor,int fgColor){
 	set_bg_color(bgColor); // делаем фон
@@ -41,7 +45,7 @@ void show_statusbar(int y, int bgColor,int fgColor){
 			//draw_filled_rect_bg(x + 2, y + 2, x + 21, y + 10);
 		}else{
 	#ifdef BipEmulator
-			word battery_percentage = 80;
+			word battery_percentage = 100;
 	#else
 			word battery_percentage = *((word*)(0x20000334));
 	#endif
@@ -117,6 +121,41 @@ set_bg_color(bgColor); // делаем фон
 		text_out_center("ᛒ", 55, y);
 	}
 #endif
+
+// Будильник
+#ifdef ALARM_CLOCK_RING
+	set_bg_color(COLOR_BLACK);
+	draw_filled_rect_bg(110, y-1, 117, y+16);
+	set_bg_color(COLOR_RED);
+	draw_filled_rect_bg(111, y+6, 116, y+15);
+	draw_filled_rect_bg(111, y, 116, y+3);
+	set_bg_color(COLOR_WHITE);
+	draw_filled_rect_bg(112, y+7, 115, y+14);
+	set_bg_color(COLOR_BLACK);
+	draw_filled_rect_bg(114, y+7, 114, y+10);
+	draw_filled_rect_bg(114, y+10, 115, y+10);
+#endif
+#ifdef ALARM_CLOCK
+	set_bg_color(COLOR_BLACK);
+	draw_filled_rect_bg(110, y-1, 117, y+16);
+	set_bg_color(COLOR_RED);
+	draw_filled_rect_bg(111, y, 116, y+15);
+	set_bg_color(COLOR_WHITE);
+	draw_filled_rect_bg(112, y+1, 115, y+14);
+	set_bg_color(COLOR_BLACK);
+	draw_filled_rect_bg(114, y+1, 114, y+8);
+	draw_filled_rect_bg(114, y+8, 115, y+8);
+#endif
+#ifdef ALARM_RING
+	set_bg_color(COLOR_BLACK);
+	draw_filled_rect_bg(112, y-2, 115, y);
+	draw_filled_rect_bg(111, y, 116, y+16);
+	draw_filled_rect_bg(110, y+11, 117, y+16);
+	set_bg_color(COLOR_YELLOW);
+	draw_filled_rect_bg(112, y+1, 115, y+15);
+	draw_filled_rect_bg(111, y+12, 116, y+15);
+#endif
+
 // РАЗДЕЛИТЕЛЬ
 	set_fg_color(fgColor); // делаем фон
 	draw_horizontal_line(y+19, 0, 176);
