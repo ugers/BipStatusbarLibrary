@@ -21,7 +21,7 @@
 #define DATA
 #define BLUETOOTH
 // Выберите 1 из трех ALARM
-#define ALARM_RING
+//#define ALARM_RING
 //#define ALARM_CLOCK
 //#define ALARM_CLOCK_RING
 
@@ -38,6 +38,7 @@ void show_statusbar(int y, int bgColor,int fgColor){
 	set_bg_color(COLOR_WHITE); //корпус
 	draw_filled_rect_bg(153, y + 1, 171, y + 15); // сама батарейка
 	draw_filled_rect_bg(171, y + 5, 173, y + 11); //кончик
+	#endif
 	word battery_percentage;
 	#ifdef BipEmulator
 			battery_percentage = 100;
@@ -50,6 +51,7 @@ void show_statusbar(int y, int bgColor,int fgColor){
 			battery_percentage = *((word*)(0x200002C8));
 		}
 	#endif
+		#ifdef BATTERY_ICON
 			//Цвет индикатора батареи Colors battery indicator
 			char r_count = battery_percentage / 33;
 			r_count = r_count > 2 ? 2 : r_count < 1 ? 0 : r_count; // if r_count > 2 = 2 elseif r_count < 1 = 0 else r_count
