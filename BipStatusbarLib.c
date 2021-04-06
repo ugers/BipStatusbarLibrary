@@ -43,13 +43,7 @@ void show_statusbar(int y, int bgColor,int fgColor){
 	#ifdef BipEmulator
 			battery_percentage = 100;
 	#else
-		if (get_fw_version() == 11536){
-			battery_percentage = *((word*)(0x20000334));
-		}else if (get_fw_version() == 11205){
-			battery_percentage = *((word*)(0x2000067C));
-		}else if (get_fw_version() == 11512){
-			battery_percentage = *((word*)(0x200002C8));
-		}
+			battery_percentage = get_battery_charge();
 	#endif
 		#ifdef BATTERY_ICON
 			//Цвет индикатора батареи Colors battery indicator
@@ -100,9 +94,9 @@ set_bg_color(bgColor); // делаем фон
 	// БЛЮТУЗ 
 	char last_bt_con;
 	#ifdef BipEmulator
-		last_bt_con = 0;
+		last_bt_con = 1;
 	#else
-		last_bt_con = check_app_state(0x200);
+		last_bt_con = IS_BT_CONNECTED;
 	#endif
 		set_bg_color(COLOR_BLACK);
 		draw_filled_rect_bg(48, y-1, 62, y+17);
