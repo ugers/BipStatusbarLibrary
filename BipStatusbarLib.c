@@ -19,7 +19,8 @@
 #define BATTERY_ICON
 #define TIME
 #define DATA
-#define BLUETOOTH
+#define BLUETOOTH_TEXT
+//#define BLUETOOTH
 // Выберите 1 из трех ALARM
 //#define ALARM_RING
 //#define ALARM_CLOCK
@@ -99,7 +100,7 @@ set_bg_color(bgColor); // делаем фон
 	_sprintf(data, "%02d.%02d", dt.day, dt.month);
 	text_out(data,4,y);		// печатаем print 
 #endif
-#ifdef BLUETOOTH
+#ifdef BLUETOOTH_TEXT
 	// БЛЮТУЗ 
 	char last_bt_con;
 	#ifdef BipEmulator
@@ -122,6 +123,11 @@ set_bg_color(bgColor); // делаем фон
 		text_out_center("ᛒ", 55, y);
 #endif
 
+// блютус ресурсом
+#ifdef BLUETOOTH
+int bt_icon = IS_BT_CONNECTED?RES_ICON_BT_CON:RES_ICON_BT_NOT_CON;
+show_elf_res_by_id(ELF_INDEX_SELF, bt_icon,	49, 0);
+#endif	  
 // Будильник Ring
 #ifdef ALARM_CLOCK_RING
 	set_bg_color(COLOR_BLACK); //подложка
