@@ -46,19 +46,28 @@ void show_statusbar(int y, int bgColor,int fgColor){
 			battery_percentage = get_battery_charge();
 	#endif
 		#ifdef BATTERY_ICON
+			#ifdef BipEmulator
+			char charging = 1;
+			#else
+			char charging = IS_CHARGE_PLUGGED;
+			#endif
 			//Цвет индикатора батареи Colors battery indicator
 			char r_count = battery_percentage / 33;
 			r_count = r_count > 2 ? 2 : r_count < 1 ? 0 : r_count; // if r_count > 2 = 2 elseif r_count < 1 = 0 else r_count
+			if (charging) set_bg_color(COLOR_BLUE);
+			else{
 				if (battery_percentage > 32) { //set color
 					set_bg_color(battery_percentage <= 65 ? COLOR_YELLOW : COLOR_GREEN);
 				}else if (battery_percentage <= 32) {
 					set_bg_color(COLOR_RED);
 				}
+			}
 				//draw cells
 				for (char i = 0; i <= r_count; i++)
 				{
 					draw_filled_rect_bg(155 + i * 5, y + 2, 159 + i * 5, y + 14);
 				}
+				if (charging) text_out_center("⚡", 160, y);
 			#endif
 			#ifdef BATTERY_TEXT
 			//Проценты батареи Battery in percents
